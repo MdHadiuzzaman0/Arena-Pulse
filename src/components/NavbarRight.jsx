@@ -52,7 +52,7 @@ const NavbarRight = () => {
                     className="menu menu-sm dropdown-content bg-arenaCard rounded-box z-50 mt-3 w-52 p-4 shadow-lg gap-3 font-sports text-lg uppercase text-white border border-white/5"
                 >
                     <li><Link href="/">Home</Link></li>
-                    <li><Link href="/allFacilities">All Facilities</Link></li>
+                    <li><Link href="/facilities">All Facilities</Link></li>
 
                     {session && (
                         <>

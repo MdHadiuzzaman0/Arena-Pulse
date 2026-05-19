@@ -7,8 +7,7 @@ const AllFacilitiesPage = async () => {
   return (
     <main className="min-h-screen bg-zinc-950 text-white py-12 px-6 lg:px-16">
       <div className="max-w-7xl mx-auto space-y-10">
-        
-        {/* 🔝 হেডিং সেকশন (Text and Theme Perfect) */}
+
         <div className="text-center space-y-2">
           <h1 className="text-3xl sm:text-4xl font-sports font-black uppercase tracking-wide">
             All Sports <span className="text-arenaOrange">Facilities</span>
@@ -18,7 +17,6 @@ const AllFacilitiesPage = async () => {
           </p>
         </div>
 
-        {/* 🎛️ Search and Filter Bar (Static UI - No state/logic added yet) */}
         <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-arenaCard p-4 rounded-xl border border-zinc-900 shadow-md">
           
           {/* Search Input Box */}
@@ -39,11 +37,9 @@ const AllFacilitiesPage = async () => {
           </select>
         </div>
 
-        {/* 🗂️ Facilities Grid Layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          
-          {/* 🛠️ এখানে আপনি আপনার লজিক দিয়ে ডাইনামিক .map() করবেন */}
-          {dummyFacilities.map((facility) => (
+
+          {facilities.map((facility) => (
             <FacilityCard key={facility._id} facility={facility} />
           ))}
 

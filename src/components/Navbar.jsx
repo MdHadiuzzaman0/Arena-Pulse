@@ -21,12 +21,12 @@ const Navbar = async () => {
                 {!session ?
                     <div className="navbar-center hidden lg:flex items-center gap-6 font-sports text-xl uppercase tracking-wider">
                         <NavLink href="/">Home</NavLink>
-                        <NavLink href="/allFacilities">All Facilities</NavLink>
+                        <NavLink href="/facilities">All Facilities</NavLink>
                     </div>
                     :
                     <div className="navbar-center hidden lg:flex items-center gap-6 font-sports text-xl uppercase tracking-wider">
                         <NavLink href="/">Home</NavLink>
-                        <NavLink href="/allFacilities">All Facilities</NavLink>
+                        <NavLink href="/facilities">All Facilities</NavLink>
                         <NavLink href="/myBookings">My Bookings</NavLink>
                         <NavLink href="/addFacility">Add Facility</NavLink>
                         <NavLink href="/manageFacilities">Manage Facilities</NavLink>

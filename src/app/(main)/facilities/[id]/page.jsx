@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getFacilityById } from "@/lib/data";
-import { IoLocationOutline, IoPricetagOutline, IoPeopleOutline, IoConstructOutline, IoCreateOutline, IoTrashOutline,IoMailOutline,IoCalendarOutline } from "react-icons/io5";
+import { Button } from '@heroui/react';
+import { IoLocationOutline, IoPricetagOutline, IoPeopleOutline, IoConstructOutline,IoMailOutline,IoCalendarOutline } from "react-icons/io5";
 
 const FacilityDetailsPage = async ({ params }) => {
     const { id } = await params;
@@ -24,20 +25,12 @@ const FacilityDetailsPage = async ({ params }) => {
           
           
             <div className="flex items-center gap-3">
-              <Link
-              href="/"
-                // href={`/manageFacilities/edit/${_id}`}
-                className="flex items-center gap-1.5 bg-zinc-900 hover:bg-zinc-800 text-amber-500 border border-zinc-800 px-4 py-2 rounded-md text-sm font-sports uppercase tracking-wider transition-all"
-              >
-                <IoCreateOutline /> Edit
-              </Link>
-              <button
-
+              <Button
                 type="button"
                 className="flex items-center gap-1.5 bg-red-950/30 hover:bg-red-900 text-red-500 border border-red-900/30 px-4 py-2 rounded-md text-sm font-sports uppercase tracking-wider transition-all"
               >
-                <IoTrashOutline /> Delete
-              </button>
+                Book now
+              </Button>
             </div>
           
         </div>

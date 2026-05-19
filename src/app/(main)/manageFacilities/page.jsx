@@ -5,12 +5,14 @@ import { getFacilityByEmail } from "@/lib/data";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 import DeleteFacility from "@/components/DeleteFacility";
+import EditFacility from "@/components/EditFacility";
+import Image from "next/image";
 
 const ManageFacilities = async () => {
     const session = await auth.api.getSession({
         headers: await headers() 
     })
-    console.log(session)
+    // console.log(session)
     const facilities = await getFacilityByEmail(session?.user.email)
 
     return (
@@ -28,21 +30,18 @@ const ManageFacilities = async () => {
                         </Link>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {facilities.map((item) => (
                             <div key={item._id} className="p-5 bg-arenaCard border border-white/5 rounded-xl shadow-xl flex flex-col justify-between">
                                 <div>
+                                    <Image src={item.image} alt='facility image' width={100} height={100} className="w-full p-2 rounded-xl" />
                                     <h3 className="text-xl font-sports text-white font-bold uppercase truncate">{item.name}</h3>
                                     <p className="text-sm text-white/60 font-body mt-1">{item.facility_type}</p>
                                     <p className="text-arenaOrange font-sports mt-3 text-lg">${item.price_per_hour}/hr</p>
                                 </div>
                                 <div className="mt-6 flex gap-3">
-                                    <Link href={`/manageFacilities/edit/${item._id}`} className="w-full">
-                                        <Button size="sm" className="bg-white/10 text-white w-full font-sports uppercase">
-                                            Edit
-                                        </Button>
-                                    </Link>
-                                    <DeleteFacility id={item._id}/>
+                                    <EditFacility facility={item}/>
+                                    <DeleteFacility id={item._id} name={item.name}/>
                                 </div>
                             </div>
                         ))}

@@ -1,8 +1,8 @@
 "use client";
 import { facilityDelete } from "@/lib/action";
 import { AlertDialog, Button } from "@heroui/react";
-import { Trash2 } from "lucide-react";
-import { toast } from "react-toastify";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { toast } from "react-hot-toast";
 import { useRouter } from 'next/navigation'
 
 const DeleteFacility = ({ id, name}) => {
@@ -18,7 +18,7 @@ const DeleteFacility = ({ id, name}) => {
   return (
     <div>
        <AlertDialog>
-      <Button variant="danger"><Trash2 /> Delete Facility</Button>
+      <Button variant="danger"><FaRegTrashAlt /> Delete Facility</Button>
       <AlertDialog.Backdrop>
         <AlertDialog.Container>
           <AlertDialog.Dialog className="sm:max-w-100">

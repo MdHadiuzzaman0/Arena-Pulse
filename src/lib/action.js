@@ -35,23 +35,23 @@ export async function facilityCreate(formData) {
 }
 
 //delete
-export async function facilityDelete ({id, name}){
-    const res = await fetch(`http://localhost:5000/facilities/${id}`,{
+export async function facilityDelete({ id, name }) {
+    const res = await fetch(`http://localhost:5000/facilities/${id}`, {
         method: "DELETE",
     })
     const data = await res.json()
     // console.log(data)
-    if(data.deletedCount > 0){
+    if (data.deletedCount > 0) {
         revalidatePath('/manageFacilities')
         return { success: true, message: `${name} is removed!` }
     }
 }
 
 //update
-export async function facilityUpdate({ id, modifiedData }){
+export async function facilityUpdate({ id, modifiedData }) {
     const data = modifiedData;
     const res = await fetch(`http://localhost:5000/facilities/${id}`, {
-        method: "PATCH",             
+        method: "PATCH",
         headers: {
             "Content-Type": "application/json"
         },
@@ -60,8 +60,27 @@ export async function facilityUpdate({ id, modifiedData }){
 
     const result = await res.json()
     // console.log(result)
-    if(result.modifiedCount > 0 || result.matchedCount > 0){
+    if (result.modifiedCount > 0 || result.matchedCount > 0) {
         revalidatePath('/manageFacilities')
         return { success: true }
+    }
+}
+
+//insert data
+export async function bookingData(bookingData) {
+    const data = bookingData;
+    const res = await fetch('http://localhost:5000/myBookings', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+
+    const result = await res.json()
+    // console.log(result)
+    if (result.insertedId) {
+        revalidatePath('/myBookings');
+        return { success: true };
     }
 }

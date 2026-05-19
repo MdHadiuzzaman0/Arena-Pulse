@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
+import BookingButton from "./BookingButton";
 
 const FacilityCard = ({ facility }) => {
   // Destructuring database data (with fallback handling)
@@ -42,13 +43,15 @@ const FacilityCard = ({ facility }) => {
         </div>
       </div>
 
-      <div className="p-5 pt-0 mt-4 flex justify-end">
+      <div className="p-5 pt-0 mt-4 flex justify-between">
         <Link
           href={`/facilities/${_id}`}
           className="bg-arenaOrange hover:bg-orange-600 text-white font-sports text-sm uppercase px-5 py-2.5 rounded font-bold tracking-wider transition-all shadow-md hover:scale-[1.02]"
         >
-          Book Now
+          View Details
         </Link>
+
+        <BookingButton facility={facility} />
       </div>
 
     </div>

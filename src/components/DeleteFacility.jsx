@@ -12,6 +12,7 @@ const DeleteFacility = ({ id, name}) => {
     if (result.success) {
       toast.error(`${name} is removed`)
       router.push('/manageFacilities')
+      router.refresh()
     }
   }
 

@@ -66,7 +66,7 @@ export async function facilityUpdate({ id, modifiedData }) {
     }
 }
 
-//insert data
+//insert booking data
 export async function bookingData(bookedData) {
     const data = bookedData;
     const res = await fetch('http://localhost:5000/myBookings', {
@@ -84,3 +84,18 @@ export async function bookingData(bookedData) {
         return { success: true };
     }
 }
+
+//delete
+export async function bookingDelete({ id, name }) {
+    const res = await fetch(`http://localhost:5000/myBookings/${id}`, {
+        method: "DELETE",
+    })
+    const data = await res.json()
+    // console.log(data)
+    if (data.deletedCount > 0) {
+        revalidatePath('/myBookings')
+        return { success: true, message: `${name} is removed!` }
+    }
+     return { success: false }
+}
+

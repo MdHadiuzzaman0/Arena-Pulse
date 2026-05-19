@@ -13,7 +13,7 @@ export async function getFacilityByEmail(email){
     return await res.json();
 }
 
-export async function getBookingData(){
-    const res = await fetch (`http://localhost:5000/facilitiesByEmail/${email}`)
+export async function getBookingData(email){
+    const res = await fetch (`http://localhost:5000/myBookingsByEmail/${email}`)
     return await res.json();
 }

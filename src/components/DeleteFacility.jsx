@@ -1,24 +1,24 @@
 "use client";
-import { eventDelete } from "@/lib/action";
+import { facilityDelete } from "@/lib/action";
 import { AlertDialog, Button } from "@heroui/react";
 import { Trash2 } from "lucide-react";
 import { toast } from "react-toastify";
 import { useRouter } from 'next/navigation'
 
-const DeleteButton = ({ id, title }) => {
+const DeleteFacility = ({ id, name}) => {
   const router = useRouter()
   async function handleDlt() {
-    const result = await eventDelete({ id, title })
+    const result = await facilityDelete({ id, name})
     if (result.success) {
-      toast.error(`${title} is removed`)
-      router.push('/events')
+      toast.error(`${name} is removed`)
+      router.push('/manageFacilities')
     }
   }
 
   return (
     <div>
        <AlertDialog>
-      <Button variant="danger"><Trash2 /> Delete Event</Button>
+      <Button variant="danger"><Trash2 /> Delete Facility</Button>
       <AlertDialog.Backdrop>
         <AlertDialog.Container>
           <AlertDialog.Dialog className="sm:max-w-100">
@@ -26,12 +26,12 @@ const DeleteButton = ({ id, title }) => {
 
             <AlertDialog.Header>
               <AlertDialog.Icon status="danger" />
-              <AlertDialog.Heading>Delete Event permanently?</AlertDialog.Heading>
+              <AlertDialog.Heading>Delete Facility permanently?</AlertDialog.Heading>
             </AlertDialog.Header>
 
             <AlertDialog.Body>
               <p>
-                This will permanently delete "<strong>{title}</strong>" and all of its
+                This will permanently delete <strong>{name}</strong> and all of its
                 data. This action cannot be undone.
               </p>
             </AlertDialog.Body>
@@ -41,7 +41,7 @@ const DeleteButton = ({ id, title }) => {
                 Cancel
               </Button>
               <Button onPress={handleDlt} slot="close" variant="danger">
-                Delete Event
+                Delete Facility
               </Button>
             </AlertDialog.Footer>
           </AlertDialog.Dialog>
@@ -53,4 +53,4 @@ const DeleteButton = ({ id, title }) => {
   );
 };
 
-export default DeleteButton;
+export default DeleteFacility;

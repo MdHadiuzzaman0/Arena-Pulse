@@ -87,7 +87,7 @@ export async function bookingData(bookedData, token) {
         body: JSON.stringify(data)
     })
 
-    console.log("res status:", res.status)  // যোগ করো
+    console.log("res status:", res.status)  
     const result = await res.json()
     console.log("result:", result)  // যোগ করো
     if (result.insertedId) {

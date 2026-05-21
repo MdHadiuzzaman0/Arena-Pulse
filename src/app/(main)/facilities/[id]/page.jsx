@@ -4,14 +4,19 @@ import { getFacilityById } from "@/lib/data";
 import { Button } from '@heroui/react';
 import BookingButton from '@/components/BookingButton'
 import { IoLocationOutline, IoPricetagOutline, IoPeopleOutline, IoConstructOutline,IoMailOutline,IoCalendarOutline } from "react-icons/io5";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 
 const FacilityDetailsPage = async ({ params }) => {
     const { id } = await params;
-    const facility = await getFacilityById(id);
-    // console.log(params, id, facility)
-   
-  const { _id, name, facility_type, location, price_per_hour, capacity, available_slots, description, image,owner_email, booking_count } = facility;
-   
+    const {token} = await auth.api.getToken({
+      headers: await headers()
+    })
+    // console.log(token)
+    const facility = await getFacilityById(id, token);
+    const { _id, name, facility_type, location, price_per_hour, capacity, available_slots, description, image,owner_email, booking_count } = facility;
+      // console.log(params, id, facility)
+
   return (
     <main className="min-h-screen bg-zinc-950 py-12 px-6 lg:px-16 text-white">
       <div className="max-w-6xl mx-auto space-y-6">

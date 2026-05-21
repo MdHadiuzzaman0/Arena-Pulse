@@ -4,6 +4,7 @@ import { Envelope } from "@gravity-ui/icons";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { authClient } from "@/lib/auth-client";
 
 const EditFacility = ({ facility }) => {
   const router = useRouter();
@@ -26,7 +27,9 @@ const EditFacility = ({ facility }) => {
       description,
       owner_email
     };
-    const result = await facilityUpdate({ id, modifiedData })
+    const { data: tokenData} = await authClient.token()
+    const token = tokenData?.token; 
+    const result = await facilityUpdate({ id, modifiedData, token })
     if (result.success) {
       toast.success(`${name} is updated`)
       router.push('/manageFacilities')

@@ -10,11 +10,14 @@ export default function AddFacilityPage() {
   const { data: session, isPending } = authClient.useSession();
   const router = useRouter()
 
+
   async function handleAdd(e) {
     e.preventDefault();
     const name = e.target.name.value
     const formData = new FormData(e.target)
-    const result = await facilityCreate(formData)
+    const { data: tokenData} = await authClient.token()
+    const token = tokenData?.token; 
+    const result = await facilityCreate(formData, token)
     if (result.success) {
       toast.success(`${name} is added successfully 🎉`);
       router.push('/facilities')

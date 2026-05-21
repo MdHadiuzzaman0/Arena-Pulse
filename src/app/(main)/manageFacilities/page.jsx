@@ -12,8 +12,13 @@ const ManageFacilities = async () => {
     const session = await auth.api.getSession({
         headers: await headers() 
     })
+
+    const {token} = await auth.api.getToken({
+        headers: await headers() 
+    })
+
     // console.log(session)
-    const facilities = await getFacilityByEmail(session?.user.email)
+    const facilities = await getFacilityByEmail(session?.user.email, token)
     console.log(facilities)
 
     return (

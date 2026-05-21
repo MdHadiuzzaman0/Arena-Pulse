@@ -12,7 +12,7 @@ export default function Loading() {
             Loading Arena
           </p>
           <p className="text-xs font-body text-zinc-600 animate-in fade-in delay-500 duration-1000 fill-mode-backwards">
-            Fetching the best facilities for you...
+            Fetching data for you...
           </p>
         </div>
       </div>

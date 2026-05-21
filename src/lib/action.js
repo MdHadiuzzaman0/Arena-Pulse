@@ -3,7 +3,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 //create
-export async function facilityCreate(formData) {
+export async function facilityCreate(formData, token) {
     const rawData = Object.fromEntries(formData.entries())
     const available_slots = rawData.available_slots.split(",").map(slot => slot.trim())
     const newFacility = {
@@ -23,7 +23,8 @@ export async function facilityCreate(formData) {
     const res = await fetch('http://localhost:5000/facilities', {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(newFacility)
     })
@@ -36,9 +37,12 @@ export async function facilityCreate(formData) {
 }
 
 //delete
-export async function facilityDelete({ id, name }) {
+export async function facilityDelete({ id, name, token }) {
     const res = await fetch(`http://localhost:5000/facilities/${id}`, {
         method: "DELETE",
+        headers: {
+            authorization: `Bearer ${token}`
+        },
     })
     const data = await res.json()
     // console.log(data)
@@ -49,12 +53,14 @@ export async function facilityDelete({ id, name }) {
 }
 
 //update
-export async function facilityUpdate({ id, modifiedData }) {
+export async function facilityUpdate({ id, modifiedData, token }) {
     const data = modifiedData;
     const res = await fetch(`http://localhost:5000/facilities/${id}`, {
         method: "PATCH",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`
+
         },
         body: JSON.stringify(data)
     })
@@ -68,18 +74,22 @@ export async function facilityUpdate({ id, modifiedData }) {
 }
 
 //insert booking data
-export async function bookingData(bookedData) {
+export async function bookingData(bookedData, token) {
+    console.log("token:", token)  // যোগ করো
+    console.log("bookedData:", bookedData)  // যোগ করো
     const data = bookedData;
     const res = await fetch('http://localhost:5000/myBookings', {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data)
     })
 
+    console.log("res status:", res.status)  // যোগ করো
     const result = await res.json()
-    // console.log(result)
+    console.log("result:", result)  // যোগ করো
     if (result.insertedId) {
         revalidatePath('/myBookings');
         return { success: true };
@@ -87,9 +97,12 @@ export async function bookingData(bookedData) {
 }
 
 //booking data delete
-export async function bookingDelete({ id, name }) {
+export async function bookingDelete({ id, name, token }) {
     const res = await fetch(`http://localhost:5000/myBookings/${id}`, {
         method: "DELETE",
+        headers: {
+            authorization: `Bearer ${token}`
+        },
     })
     const data = await res.json()
     // console.log(data)
@@ -97,17 +110,17 @@ export async function bookingDelete({ id, name }) {
         revalidatePath('/myBookings')
         return { success: true, message: `${name} is removed!` }
     }
-     return { success: false }
+    return { success: false }
 }
 
 //filter
 export async function fetchFilteredFacilities(sportsArray) {
     const res = await fetch(`http://localhost:5000/facilities/filter`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(sportsArray), 
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sportsArray),
     });
     const result = await res.json()
     // console.log(data)
@@ -115,7 +128,7 @@ export async function fetchFilteredFacilities(sportsArray) {
 }
 
 //serach
-export async function searchFacilities(text){
+export async function searchFacilities(text) {
     const res = await fetch(`http://localhost:5000/facilities/search?searchedValue=${text}`)
     const result = await res.json()
     // console.log(data)

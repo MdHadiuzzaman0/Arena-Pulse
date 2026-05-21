@@ -9,8 +9,12 @@ const MyBookingCard = async () => {
     const session = await auth.api.getSession({
         headers: await headers()
     });
+    
+    const {token} = await auth.api.getToken({
+          headers: await headers()
+        })
 
-    const bookingData = await getBookingData(session?.user?.email) || [];
+    const bookingData = await getBookingData(session?.user?.email, token) || [];
 
     return (
         <main className="min-h-screen bg-zinc-950 py-12 px-6 lg:px-16 text-white">

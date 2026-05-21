@@ -4,11 +4,15 @@ import { AlertDialog, Button } from "@heroui/react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import { useRouter } from 'next/navigation'
+import { authClient } from "@/lib/auth-client";
 
 const DeleteFacility = ({ id, name}) => {
+
   const router = useRouter()
   async function handleDlt() {
-    const result = await facilityDelete({ id, name})
+    const { data: tokenData} = await authClient.token()
+    const token = tokenData?.token; 
+    const result = await facilityDelete({ id, name, token })
     if (result.success) {
       toast.error(`${name} is removed`)
       router.push('/manageFacilities')

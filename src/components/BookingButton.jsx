@@ -30,8 +30,11 @@ const BookingButton = ({ facility }) => {
             id,
             status: 'Pending',
         };
-        console.log(bookedData)
-        const result = await bookingData(bookedData)
+        // console.log(bookedData)
+        const { data: tokenData} = await authClient.token()
+        const token = tokenData?.token; 
+        const result = await bookingData(bookedData, token);
+        console.log(result, token)
         if (result.success) {
             toast.success(`${name} is booked!`)
             router.push('/myBookings')
@@ -145,7 +148,7 @@ const BookingButton = ({ facility }) => {
                 </Button>
                 
                 <Button 
-                  slot="close"
+                  
                   type="submit"
                   className="bg-arenaOrange hover:bg-orange-600 text-white font-body text-sm font-bold px-5 py-2.5 rounded-md transition-all shadow-lg shadow-orange-600/10 cursor-pointer"
                 >

@@ -12,8 +12,8 @@ export default function ConditionalSections({children}) {
   
   return (
     <>
-      <ProjectFlow/>
       {children}
+      <ProjectFlow/>
       <WhyChooseUs />
       <Footer/>
     </>

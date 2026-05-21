@@ -20,7 +20,7 @@ export async function facilityCreate(formData, token) {
     };
     console.log(newFacility)
 
-    const res = await fetch('http://localhost:5000/facilities', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function facilityCreate(formData, token) {
 
 //delete
 export async function facilityDelete({ id, name, token }) {
-    const res = await fetch(`http://localhost:5000/facilities/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities/${id}`, {
         method: "DELETE",
         headers: {
             authorization: `Bearer ${token}`
@@ -55,7 +55,7 @@ export async function facilityDelete({ id, name, token }) {
 //update
 export async function facilityUpdate({ id, modifiedData, token }) {
     const data = modifiedData;
-    const res = await fetch(`http://localhost:5000/facilities/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities/${id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
@@ -78,7 +78,7 @@ export async function bookingData(bookedData, token) {
     console.log("token:", token)  // যোগ করো
     console.log("bookedData:", bookedData)  // যোগ করো
     const data = bookedData;
-    const res = await fetch('http://localhost:5000/myBookings', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/myBookings`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -98,7 +98,7 @@ export async function bookingData(bookedData, token) {
 
 //booking data delete
 export async function bookingDelete({ id, name, token }) {
-    const res = await fetch(`http://localhost:5000/myBookings/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/myBookings/${id}`, {
         method: "DELETE",
         headers: {
             authorization: `Bearer ${token}`
@@ -115,7 +115,7 @@ export async function bookingDelete({ id, name, token }) {
 
 //filter
 export async function fetchFilteredFacilities(sportsArray) {
-    const res = await fetch(`http://localhost:5000/facilities/filter`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities/filter`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -129,7 +129,7 @@ export async function fetchFilteredFacilities(sportsArray) {
 
 //serach
 export async function searchFacilities(text) {
-    const res = await fetch(`http://localhost:5000/facilities/search?searchedValue=${text}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities/search?searchedValue=${text}`)
     const result = await res.json()
     // console.log(data)
     return result;

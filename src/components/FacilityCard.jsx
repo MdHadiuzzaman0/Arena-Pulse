@@ -7,7 +7,7 @@ import BookingButton from "./BookingButton";
 const FacilityCard = ({ facility }) => {
   // Destructuring database data (with fallback handling)
   const { _id, name, facility_type, location, price_per_hour, image } = facility;
-  console.log(_id)
+  // console.log(_id)
 
   return (
     <div className="bg-arenaCard border border-zinc-800/80 rounded-xl overflow-hidden hover:border-arenaOrange/40 transition-all duration-300 group flex flex-col justify-between h-full shadow-lg relative">

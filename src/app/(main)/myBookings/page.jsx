@@ -39,7 +39,7 @@ const MyBookingCard = async () => {
                                     year: "numeric"
                                   })
                                 : "N/A"; */}
-                                console.log(item._id)
+                                // console.log(item._id)
                             return (
                                 <div
                                     className="bg-arenaCard border border-zinc-900 rounded-2xl overflow-hidden hover:border-arenaOrange/40 transition-all duration-300 group flex flex-col sm:flex-row items-center gap-6 p-5 shadow-xl relative"

@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from '@/components/Navbar'
 import { Toaster } from 'react-hot-toast';
 import ConditionalPageShow from "@/components/ConditionalPageShow";
+import FacilityCardOfHomePage from '@/components/FacilityCardOfHomePage';
 import Footer from "@/components/Footer";
 
 const barlowCondensed = Barlow_Condensed({
@@ -31,7 +32,9 @@ export default function RootLayout({ children }) {
       <body className="font-body bg-[#122926] text-white antialiased">
         <Navbar />
         <main>{children}</main>
-        <ConditionalPageShow />
+        <ConditionalPageShow>
+          <FacilityCardOfHomePage />
+        </ConditionalPageShow>
         <Footer />
         <Toaster position="top-right" reverseOrder={true}/>
       </body>

@@ -2,7 +2,6 @@
 import { usePathname } from 'next/navigation';
 import ProjectFlow from './ProjectFlow';
 import WhyChooseUs from './WhyChooseUs';
-import FacilityCardOfHomePage from './FacilityCardOfHomePage';
 import Ratings from './Ratings';
 import Review from './Review';
 
@@ -15,7 +14,6 @@ export default function ConditionalSections({children}) {
     <>
       <Ratings />
       <ProjectFlow/>
-      <FacilityCardOfHomePage />
       {children}
       <WhyChooseUs />
       <Review/>
